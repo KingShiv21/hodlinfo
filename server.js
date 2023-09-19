@@ -3,6 +3,7 @@ import path from "path";
 import mongoose from "mongoose";
 import axios from "axios";
 import { config } from "dotenv"
+import cors from "cors"
 
 config({
   path:"./data/config.env",
@@ -37,6 +38,13 @@ app.use(express.static(path.join(path.resolve(), "public")));
 app.use(express.urlencoded({ extended: true }));
 // Setting up View Engine
 app.set("view engine", "ejs");
+app.use(cors(
+  {
+      origin: [process.env.FROENT_URL],
+      methods: ["GET" , "POST" , "PUT" , "DELETE"],
+      credentials:true,
+  }
+))
 
 
 
